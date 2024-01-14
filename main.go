@@ -5,24 +5,42 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"sort"
 
 	"github.com/urfave/cli"
 )
 
-// TODO: support other OS
-// https://gist.github.com/sevkin/9798d67b2cb9d07cb05f89f14ba682f8
+func sortMapKeys(m map[string]string) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
+}
 
 func main() {
-	links := []string{"http://archlinux.org", "http://google.com", "http://facebook.com"}
-	var i int
+	links := map[string]string{
+		"t": "https://tailwindcss.com/docs/installation",
+		"g": "https://gobyexample.com/",
+		"l": "https://www.lazyvim.org/keymaps",
+		"a": "https://aur.archlinux.org/",
+	}
 
 	app := &cli.App{
 		Name:  "goto-docs",
 		Usage: "Open a link in your browser",
 		Action: func(*cli.Context) error {
+			sortedKeys := sortMapKeys(links)
+			for _, k := range sortedKeys {
+				fmt.Println(k, links[k])
+			}
+
 			fmt.Print("Type a number: ")
+			var i string
 			fmt.Scanln(&i)
-			exec.Command("xdg-open", links[i]).Start()
+
+			exec.Command("firefox", links[i]).Run()
 			return nil
 		},
 	}
