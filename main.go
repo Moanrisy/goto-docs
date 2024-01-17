@@ -3,8 +3,12 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
+	"os/exec"
 	"sort"
 
+	"github.com/eiannone/keyboard"
+	"github.com/urfave/cli"
 	"gopkg.in/yaml.v3"
 )
 
@@ -42,11 +46,20 @@ config:
 func main() {
 	m := make(map[interface{}]interface{})
 
-	err := yaml.Unmarshal([]byte(data), &m)
+	yamlFile, err := os.ReadFile("/mnt/storage2/Projects/practices/go/cli/goto-docs/conf.yaml")
 	if err != nil {
-		log.Fatalf("error: %v", err)
+		log.Printf("yamlFile.Get err   #%v ", err)
 	}
-	fmt.Printf("--- m:\n%v\n\n", m)
+	err = yaml.Unmarshal(yamlFile, &m)
+	if err != nil {
+		log.Fatalf("Unmarshal: %v", err)
+	}
+
+	// err = yaml.Unmarshal([]byte(data), &m)
+	// if err != nil {
+	// 	log.Fatalf("error: %v", err)
+	// }
+	// fmt.Printf("--- m:\n%v\n\n", m)
 
 	// Check if "config" key exists and is of the right type
 	configValue, ok := m["config"].(map[string]interface{})
@@ -56,20 +69,22 @@ func main() {
 	}
 
 	// Loop through the nested map under "config"
+	links := map[Key]Link{}
 	for key, value := range configValue {
-		fmt.Println("Key:", key)
-		fmt.Println("Value:", value)
+		// fmt.Println("First:", string(key[0]))
+		// fmt.Println("Second:", string(key[1]))
+		// fmt.Println("Name:", value.(map[string]interface{})["Name"])
+		// fmt.Println("Url:", value.(map[string]interface{})["Url"])
+		// fmt.Println()
+
+		k := Key{First: rune(key[0]), Second: rune(key[1])}
+		n := value.(map[string]interface{})["Name"].(string)
+		u := value.(map[string]interface{})["Url"].(string)
+		l := Link{Name: n, Url: u}
+		links[k] = l
 	}
 
-	// myChar := 'g'
-	// fmt.Println(m["config"])
-	// for key, value := range m["config"] {
-	// 	fmt.Println("Key:", key)
-	// }
-	// fmt.Println(m["config"].(map[string]interface{})[string(myChar)+string(myChar)])
-	// fmt.Println(m[string(myChar)+string(myChar)])
-	// fmt.Println(m[string(myChar)+string(myChar)].(map[string]interface{})["Name"])
-	// fmt.Println(m[string(myChar)+string(myChar)].(map[string]interface{})["Url"])
+	// fmt.Println(links)
 
 	// links := map[Key]Link{
 	// 	{'g', 'n'}: {"github new repo", "https://github.com/new"},
@@ -85,56 +100,56 @@ func main() {
 	// 	{'a', 'a'}: {"AUR", "https://aur.archlinux.org/"},
 	// 	{'m', 'm'}: {"mam", "https://www.myanonamouse.net/tor/browse.php?&tor%5BsrchIn%5D%5Btitle%5D=true&tor%5BsrchIn%5D%5Bauthor%5D=true&tor%5BsearchType%5D=all&tor%5BsearchIn%5D=torrents&tor%5Bcat%5D%5B%5D=53&tor%5Bcat%5D%5B%5D=75&tor%5Bcat%5D%5B%5D=0&tor%5BbrowseFlagsHideVsShow%5D=0&&&tor%5BminSize%5D=0&tor%5BmaxSize%5D=0&tor%5Bunit%5D=1&tor%5BminSeeders%5D=0&tor%5BmaxSeeders%5D=0&tor%5BminLeechers%5D=0&tor%5BmaxLeechers%5D=0&tor%5BminSnatched%5D=0&tor%5BmaxSnatched%5D=0&&tor%5BsortType%5D=default&tor%5BstartNumber%5D=0&thumbnail=true"},
 	// }
-	//
-	// app := &cli.App{
-	// 	Name:  "goto-docs",
-	// 	Usage: "Open a link in your browser",
-	// 	Action: func(*cli.Context) error {
-	// 		var firstKeys []rune
-	// 		for key := range links {
-	// 			firstKeys = append(firstKeys, key.First)
-	// 		}
-	// 		// TODO: sort by Key struct using multiplication of rune First, Second, Third instead of using only rune First
-	// 		sortedKeys := sortMapKeys(firstKeys)
-	// 		isPrinted := map[Key]bool{}
-	// 		for _, sortedKey := range sortedKeys {
-	// 			for key, link := range links {
-	// 				if sortedKey == key.First {
-	// 					if isPrinted[Key{key.First, key.Second}] {
-	// 						continue
-	// 					} else {
-	// 						fmt.Printf("%v %v -> %v\n", string(key.First), string(key.Second), string(link.Name))
-	// 					}
-	//
-	// 					isPrinted[Key{
-	// 						key.First, key.Second,
-	// 					}] = true
-	//
-	// 					break
-	// 				}
-	// 			}
-	// 		}
-	//
-	// 		char, _, err := keyboard.GetSingleKey()
-	// 		if err != nil {
-	// 			panic(err)
-	// 		}
-	// 		char2, _, err := keyboard.GetSingleKey()
-	// 		if err != nil {
-	// 			panic(err)
-	// 		}
-	//
-	// 		for key, link := range links {
-	// 			if char == key.First && char2 == key.Second {
-	// 				exec.Command("firefox", link.Url).Run()
-	// 			}
-	// 		}
-	//
-	// 		return nil
-	// 	},
-	// }
-	//
-	// if err := app.Run(os.Args); err != nil {
-	// 	log.Fatal(err)
-	// }
+
+	app := &cli.App{
+		Name:  "goto-docs",
+		Usage: "Open a link in your browser",
+		Action: func(*cli.Context) error {
+			var firstKeys []rune
+			for key := range links {
+				firstKeys = append(firstKeys, key.First)
+			}
+			// TODO: sort by Key struct using multiplication of rune First, Second, Third instead of using only rune First
+			sortedKeys := sortMapKeys(firstKeys)
+			isPrinted := map[Key]bool{}
+			for _, sortedKey := range sortedKeys {
+				for key, link := range links {
+					if sortedKey == key.First {
+						if isPrinted[Key{key.First, key.Second}] {
+							continue
+						} else {
+							fmt.Printf("%v %v -> %v\n", string(key.First), string(key.Second), string(link.Name))
+						}
+
+						isPrinted[Key{
+							key.First, key.Second,
+						}] = true
+
+						break
+					}
+				}
+			}
+
+			char, _, err := keyboard.GetSingleKey()
+			if err != nil {
+				panic(err)
+			}
+			char2, _, err := keyboard.GetSingleKey()
+			if err != nil {
+				panic(err)
+			}
+
+			for key, link := range links {
+				if char == key.First && char2 == key.Second {
+					exec.Command("firefox", link.Url).Run()
+				}
+			}
+
+			return nil
+		},
+	}
+
+	if err := app.Run(os.Args); err != nil {
+		log.Fatal(err)
+	}
 }

@@ -1,0 +1,37 @@
+config:
+  gn:
+    Name: github new repo
+    Url: https://github.com/new
+  oo:
+    Name: onedrive skripsi
+    Url: https://onedrive.live.com/?id=FA1B916ECA036D35%213186&cid=FA1B916ECA036D35
+  m2:
+    Name: mail asamsulfat
+    Url: https://mail.google.com/mail/u/5/
+  m1:
+    Name: mail 1
+    Url: https://mail.google.com/mail/u/0/#inbox
+  m3:
+    Name: mail personal
+    Url: https://mail.google.com/mail/u/2/
+  m4:
+    Name: mail newsletter
+    Url: https://mail.google.com/mail/u/3/
+  ll:
+    Name: lrc maker
+    Url: https://lrc-maker.github.io/#/
+  dt:
+    Name: docs tailwindcss
+    Url: https://tailwindcss.com/docs/installation
+  dg:
+    Name: docs gobyexample
+    Url: https://gobyexample.com/
+  dn:
+    Name: docs neovim with lazyvim keymaps
+    Url: https://www.lazyvim.org/keymaps
+  aa:
+    Name: AUR
+    Url: https://aur.archlinux.org/
+  mm:
+    Name: mam
+    Url: https://www.myanonamouse.net/tor/browse.php?&tor%5BsrchIn%5D%5Btitle%5D=true&tor%5BsrchIn%5D%5Bauthor%5D=true&tor%5BsearchType%5D=all&tor%5BsearchIn%5D=torrents&tor%5Bcat%5D%5B%5D=53&tor%5Bcat%5D%5B%5D=75&tor%5Bcat%5D%5B%5D=0&tor%5BbrowseFlagsHideVsShow%5D=0&&&tor%5BminSize%5D=0&tor%5BmaxSize%5D=0&tor%5Bunit%5D=1&tor%5BminSeeders%5D=0&tor%5BmaxSeeders%5D=0&tor%5BminLeechers%5D=0&tor%5BmaxLeechers%5D=0&tor%5BminSnatched%5D=0&tor%5BmaxSnatched%5D=0&&tor%5BsortType%5D=default&tor%5BstartNumber%5D=0&thumbnail=true
