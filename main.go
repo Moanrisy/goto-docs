@@ -20,8 +20,8 @@ func sortMapKeys(m []rune) []rune {
 
 type Key struct {
 	// TODO: match dinamically if using 3 rune
-	// if only z exist, then z called instead of typing 3 rune 'zzz'
-	// if only g g exist, then it called instead typing g g g
+	// if only z exist, then z instansly called instead of typing 3 rune 'zzz'
+	// if only g g exist, then g g called instansly instead typing g g g
 
 	// First, Second, Third rune
 	First, Second rune
@@ -56,12 +56,22 @@ func main() {
 			for key := range links {
 				firstKeys = append(firstKeys, key.First)
 			}
-			// TODO: sort by Key struct by sum of First, Second, Third
+			// TODO: sort by Key struct using multiplication of rune First, Second, Third instead of using only rune First
 			sortedKeys := sortMapKeys(firstKeys)
+			isPrinted := map[Key]bool{}
 			for _, sortedKey := range sortedKeys {
 				for key, link := range links {
 					if sortedKey == key.First {
-						fmt.Printf("%v %v -> %v\n", string(key.First), string(key.Second), string(link.Name))
+						if isPrinted[Key{key.First, key.Second}] {
+							continue
+						} else {
+							fmt.Printf("%v %v -> %v\n", string(key.First), string(key.Second), string(link.Name))
+						}
+
+						isPrinted[Key{
+							key.First, key.Second,
+						}] = true
+
 						break
 					}
 				}
@@ -78,7 +88,6 @@ func main() {
 
 			for key, link := range links {
 				if char == key.First && char2 == key.Second {
-					// fmt.Printf("%v %v - %v\n", string(key.First), string(key.Second), string(link))
 					exec.Command("firefox", link.Url).Run()
 				}
 			}
