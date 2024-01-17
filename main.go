@@ -27,21 +27,25 @@ type Key struct {
 	First, Second rune
 }
 
+type Link struct {
+	Name string
+	Url  string
+}
+
 func main() {
-	links := map[Key]string{
-		{'g', 'n'}: "https://github.com/new",
-		{'o', 'o'}: "https://onedrive.live.com/?id=FA1B916ECA036D35%213186&cid=FA1B916ECA036D35",
-		{'2', '2'}: "https://mail.google.com/mail/u/5/",
-		{'2', '1'}: "https://mail.google.com/mail/u/5/",
-		{'1', '1'}: "https://mail.google.com/mail/u/0/#inbox",
-		// '3':       "https://mail.google.com/mail/u/2/",
-		// '4':       "https://mail.google.com/mail/u/3/",
-		// 'l':       "https://lrc-maker.github.io/#/",
-		// 't':       "https://tailwindcss.com/docs/installation",
-		// 'g':       "https://gobyexample.com/",
-		// 'n':       "https://www.lazyvim.org/keymaps",
-		// 'a':       "https://aur.archlinux.org/",
-		// 'm':       "https://www.myanonamouse.net/tor/browse.php?&tor%5BsrchIn%5D%5Btitle%5D=true&tor%5BsrchIn%5D%5Bauthor%5D=true&tor%5BsearchType%5D=all&tor%5BsearchIn%5D=torrents&tor%5Bcat%5D%5B%5D=53&tor%5Bcat%5D%5B%5D=75&tor%5Bcat%5D%5B%5D=0&tor%5BbrowseFlagsHideVsShow%5D=0&&&tor%5BminSize%5D=0&tor%5BmaxSize%5D=0&tor%5Bunit%5D=1&tor%5BminSeeders%5D=0&tor%5BmaxSeeders%5D=0&tor%5BminLeechers%5D=0&tor%5BmaxLeechers%5D=0&tor%5BminSnatched%5D=0&tor%5BmaxSnatched%5D=0&&tor%5BsortType%5D=default&tor%5BstartNumber%5D=0&thumbnail=true",
+	links := map[Key]Link{
+		{'g', 'n'}: {"github new repo", "https://github.com/new"},
+		{'o', 'o'}: {"onedrive skripsi", "https://onedrive.live.com/?id=FA1B916ECA036D35%213186&cid=FA1B916ECA036D35"},
+		{'2', '2'}: {"mail asamsulfat", "https://mail.google.com/mail/u/5/"},
+		{'1', '1'}: {"mail 1", "https://mail.google.com/mail/u/0/#inbox"},
+		{'3', '3'}: {"mail personal", "https://mail.google.com/mail/u/2/"},
+		{'4', '4'}: {"mail newsletter", "https://mail.google.com/mail/u/3/"},
+		{'l', 'l'}: {"lrc maker", "https://lrc-maker.github.io/#/"},
+		{'d', 't'}: {"docs tailwindcss", "https://tailwindcss.com/docs/installation"},
+		{'d', 'g'}: {"docs gobyexample", "https://gobyexample.com/"},
+		{'d', 'n'}: {"docs neovim with lazyvim keymaps", "https://www.lazyvim.org/keymaps"},
+		{'a', 'a'}: {"AUR", "https://aur.archlinux.org/"},
+		{'m', 'm'}: {"mam", "https://www.myanonamouse.net/tor/browse.php?&tor%5BsrchIn%5D%5Btitle%5D=true&tor%5BsrchIn%5D%5Bauthor%5D=true&tor%5BsearchType%5D=all&tor%5BsearchIn%5D=torrents&tor%5Bcat%5D%5B%5D=53&tor%5Bcat%5D%5B%5D=75&tor%5Bcat%5D%5B%5D=0&tor%5BbrowseFlagsHideVsShow%5D=0&&&tor%5BminSize%5D=0&tor%5BmaxSize%5D=0&tor%5Bunit%5D=1&tor%5BminSeeders%5D=0&tor%5BmaxSeeders%5D=0&tor%5BminLeechers%5D=0&tor%5BmaxLeechers%5D=0&tor%5BminSnatched%5D=0&tor%5BmaxSnatched%5D=0&&tor%5BsortType%5D=default&tor%5BstartNumber%5D=0&thumbnail=true"},
 	}
 
 	app := &cli.App{
@@ -57,7 +61,8 @@ func main() {
 			for _, sortedKey := range sortedKeys {
 				for key, link := range links {
 					if sortedKey == key.First {
-						fmt.Printf("%v %v - %v\n", string(key.First), string(key.Second), string(link))
+						fmt.Printf("%v %v -> %v\n", string(key.First), string(key.Second), string(link.Name))
+						break
 					}
 				}
 			}
@@ -74,7 +79,7 @@ func main() {
 			for key, link := range links {
 				if char == key.First && char2 == key.Second {
 					// fmt.Printf("%v %v - %v\n", string(key.First), string(key.Second), string(link))
-					exec.Command("firefox", link).Run()
+					exec.Command("firefox", link.Url).Run()
 				}
 			}
 
