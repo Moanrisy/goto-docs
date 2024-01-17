@@ -8,4 +8,5 @@ require (
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/urfave/cli v1.22.14 // indirect
 	golang.org/x/sys v0.16.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
