@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"runtime"
 	"sort"
 
 	"github.com/eiannone/keyboard"
@@ -134,6 +135,14 @@ func main() {
 			if err != nil {
 				panic(err)
 			}
+
+			ClearTerminal()
+			for key, link := range links {
+				if char == key.First {
+					fmt.Printf("%v %v -> %v\n", string(key.First), string(key.Second), string(link.Name))
+				}
+			}
+
 			char2, _, err := keyboard.GetSingleKey()
 			if err != nil {
 				panic(err)
@@ -152,4 +161,21 @@ func main() {
 	if err := app.Run(os.Args); err != nil {
 		log.Fatal(err)
 	}
+}
+
+func ClearTerminal() {
+	var cmd *exec.Cmd
+
+	switch runtime.GOOS {
+	case "windows":
+		cmd = exec.Command("cmd", "/c", "cls")
+	case "darwin", "linux":
+		cmd = exec.Command("clear")
+	default:
+		// Unsupported operating system
+		return
+	}
+
+	cmd.Stdout = os.Stdout
+	cmd.Run()
 }

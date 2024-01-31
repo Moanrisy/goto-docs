@@ -1,4 +1,37 @@
 config:
+  em:
+    Name: entertainment movies
+    Url: https://solarmovies.win/home
+  ea:
+    Name: entertainment anime
+    Url: https://aniwave.to/home
+  pp:
+    Name: pomo
+    Url: https://pomodoro-graph.fly.dev/
+  tf:
+    Name: tf
+    Url: https://share.tutflix.org/#IVnlpzeICd0HQYr1hMEgBBjrNCkXD0/Po1GgD/GA4dtkISr0fxXavfNfzuW8Ps/NfFRJ5DeY0tsRMT0JEA==
+  d1:
+    Name: drakor 1 shop for killers
+    Url: https://mkvindex.in/archives/25997
+  to:
+    Name: tokped order list
+    Url: https://www.tokopedia.com/order-list
+  cw:
+    Name: chat whatsapp
+    Url: https://web.whatsapp.com/
+  cd:
+    Name: chat discord
+    Url: https://discord.com/app
+  cg:
+    Name: chatgpt
+    Url: https://chat.openai.com/
+  ba:
+    Name: book annas
+    Url: https://annas-archive.org/
+  r1:
+    Name: ssg
+    Url: https://gist.github.com/ronaudinho/6f6ed28737256b57aaff64cfefea2bcb
   gn:
     Name: github new repo
     Url: https://github.com/new
@@ -11,7 +44,7 @@ config:
   m1:
     Name: mail 1
     Url: https://mail.google.com/mail/u/0/#inbox
-  m3:
+  mp:
     Name: mail personal
     Url: https://mail.google.com/mail/u/2/
   m4:
