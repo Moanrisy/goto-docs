@@ -47,7 +47,7 @@ config:
 func main() {
 	m := make(map[interface{}]interface{})
 
-	yamlFile, err := os.ReadFile("/mnt/storage2/Projects/practices/go/cli/goto-docs/conf.yaml")
+	yamlFile, err := os.ReadFile("/mnt/storage2/Projects/live/goto-docs/conf.yaml")
 	if err != nil {
 		log.Printf("yamlFile.Get err   #%v ", err)
 	}

@@ -1,4 +1,10 @@
 config:
+  si:
+    Name: socialmedia instagram
+    Url: https://www.instagram.com/
+  st:
+    Name: socialmedia tiktok
+    Url: https://www.tiktok.com/foryou
   em:
     Name: entertainment movies
     Url: https://solarmovies.win/home
@@ -8,6 +14,12 @@ config:
   pp:
     Name: pomo
     Url: https://pomodoro-graph.fly.dev/
+  cl:
+    Name: co l
+    Url: https://downloadly.ir/
+  ct:
+    Name: co t
+    Url: https://tutflix.org/whats-new/resources/2147152/
   tf:
     Name: tf
     Url: https://share.tutflix.org/#IVnlpzeICd0HQYr1hMEgBBjrNCkXD0/Po1GgD/GA4dtkISr0fxXavfNfzuW8Ps/NfFRJ5DeY0tsRMT0JEA==
@@ -17,6 +29,12 @@ config:
   to:
     Name: tokped order list
     Url: https://www.tokopedia.com/order-list
+  tt:
+    Name: transactions tokopedia
+    Url: https://www.tokopedia.com/order-list?status=Dalam%20Proses&page=1
+  ts:
+    Name: transactions shopee
+    Url: https://shopee.co.id/user/purchase/?type=7
   cw:
     Name: chat whatsapp
     Url: https://web.whatsapp.com/
