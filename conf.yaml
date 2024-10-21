@@ -1,4 +1,10 @@
 config:
+  as:
+    Name: administration s
+    Url: https://siam.ub.ac.id/
+  af:
+    Name: administration f
+    Url: https://filkom.ub.ac.id/legacy/auth
   si:
     Name: socialmedia instagram
     Url: https://www.instagram.com/
@@ -58,7 +64,7 @@ config:
     Url: https://onedrive.live.com/?id=FA1B916ECA036D35%213186&cid=FA1B916ECA036D35
   m2:
     Name: mail asamsulfat
-    Url: https://mail.google.com/mail/u/5/
+    Url: https://mail.google.com/mail/u/4/
   m1:
     Name: mail 1
     Url: https://mail.google.com/mail/u/0/#inbox
